@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 2: Conocemos a nuestros usuarios y validamos sus problemas | El Niño</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nino: {
+                            navy: '#0f2744',
+                            blue: '#1b4d7e',
+                            cyan: '#0284c7',
+                            light: '#f0f7ff',
+                            accent: '#f59e0b',
+                            danger: '#ef4444',
+                            success: '#10b981'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white !important; color: black !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- BARRA DE PROGRESO FLOTANTE -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur shadow-sm no-print">
+        <div class="max-w-5xl mx-auto px-4 py-2 flex items-center justify-between text-xs sm:text-sm">
+            <span class="font-bold text-nino-navy flex items-center gap-2">
+                <i class="fa-solid fa-graduation-cap text-nino-cyan"></i> Progreso de la Sesión
+            </span>
+            <span id="progress-percent" class="font-bold text-nino-cyan">0% completado</span>
+        </div>
+        <div class="w-full bg-slate-200 h-2">
+            <div id="progress-bar" class="bg-gradient-to-r from-nino-cyan to-nino-accent h-2 w-0 transition-all duration-500 ease-out"></div>
+        </div>
+    </div>
+
+    <!-- ENCABEZADO -->
+    <header class="bg-gradient-to-r from-nino-navy via-nino-blue to-nino-navy text-white pt-20 pb-12 px-4 shadow-lg border-b-4 border-nino-accent no-print">
+        <div class="max-w-5xl mx-auto text-center space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-xs font-semibold uppercase tracking-wider text-cyan-200 border border-white/20">
+                <i class="fa-solid fa-cloud-showers-heavy"></i> Innovación Tecnológica frente a El Niño
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                Sesión 2: Conocemos a nuestros usuarios y validamos sus problemas
+            </h1>
+            <p class="text-base sm:text-lg text-cyan-100 max-w-3xl mx-auto font-light">
+                Investigación empírica, empatía contextual y formulación de los Bloques 1 y 2 del Lean Canvas.
+            </p>
+            <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-2 text-sm text-amber-300 font-medium bg-white/5 py-2 px-4 rounded-xl border border-white/10 w-fit mx-auto">
+                <span><i class="fa-solid fa-award"></i> Guía Pedagógica:</span>
+                <span class="text-white font-semibold">Maestro Robinson Mitchel Gonzales Quiliche</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="sticky top-11 z-40 bg-white border-b border-slate-200 shadow-sm no-print">
+        <div class="max-w-5xl mx-auto px-4 flex overflow-x-auto gap-2 sm:gap-4 py-2 text-xs sm:text-sm font-medium text-slate-600">
+            <a href="#modulo1" class="hover:text-nino-cyan whitespace-nowrap px-3 py-1 rounded-lg hover:bg-slate-100 transition"><i class="fa-solid fa-street-view mr-1"></i> Módulo 1: Caso Diego</a>
+            <a href="#modulo2" class="hover:text-nino-cyan whitespace-nowrap px-3 py-1 rounded-lg hover:bg-slate-100 transition"><i class="fa-solid fa-brain mr-1"></i> Módulo 2: Ideas vs Necesidades</a>
+            <a href="#modulo3" class="hover:text-nino-cyan whitespace-nowrap px-3 py-1 rounded-lg hover:bg-slate-100 transition"><i class="fa-solid fa-clipboard-question mr-1"></i> Módulo 3: Entrevistas</a>
+            <a href="#modulo4" class="hover:text-nino-cyan whitespace-nowrap px-3 py-1 rounded-lg hover:bg-slate-100 transition"><i class="fa-solid fa-table-cells-large mr-1"></i> Módulo 4: Lean Canvas</a>
+            <a href="#modulo5" class="hover:text-nino-cyan whitespace-nowrap px-3 py-1 rounded-lg hover:bg-slate-100 transition"><i class="fa-solid fa-star-half-stroke mr-1"></i> Módulo 5: Evaluación Final</a>
+        </div>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12 flex-1 w-full">
+
+        <!-- MÓDULO 1: CASO DIEGO EN TRUJILLO -->
+        <section id="modulo1" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 rounded-xl bg-blue-100 text-nino-blue flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-nino-navy">Módulo 1: El Caso de Diego en Trujillo</h2>
+                    <p class="text-xs sm:text-sm text-slate-500">¿Crear una aplicación de inmediato o comprender la realidad local?</p>
+                </div>
+            </div>
+
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 sm:p-5 rounded-r-xl space-y-3">
+                <h3 class="font-bold text-amber-900 flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot text-amber-600"></i> Dilema en Trujillo durante El Niño
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    Durante la activación de quebradas y lluvias en Trujillo, Diego pensó: 
+                    <em>"¡Tengo la solución perfecta! Voy a programar una app móvil pesada con mapas 3D para alertar a todos"</em>. 
+                    Sin embargo, al salir al terreno descubrió que durante la emergencia las redes colapsan, los celulares se descargan y las prioridades de los vecinos son muy distintas.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <h4 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-arrows-split-up-and-left text-nino-cyan"></i> 
+                    Actividad de Empatía: Identifica la necesidad según el usuario
+                </h4>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="p-3 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 text-xs text-slate-700">
+                        <p class="font-medium">"Necesito proteger mi mercadería del suelo y saber con horas de anticipación si el agua entrará al mercado."</p>
+                        <select onchange="checkAssignment(1, this.value)" class="mt-2 w-full text-xs p-1.5 rounded border border-slate-300 bg-white font-medium">
+                            <option value="">¿Quién lo necesita?</option>
+                            <option value="comerciante">Comerciante de calzado / abarrotes</option>
+                            <option value="peaton">Transportista urbano / Peatón</option>
+                            <option value="vecina">Vecina de vivienda ribereña</option>
+                        </select>
+                        <div id="feedback-card-1" class="mt-1 text-[11px] font-semibold hidden"></div>
+                    </div>
+
+                    <div class="p-3 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 text-xs text-slate-700">
+                        <p class="font-medium">"Necesito conocer en tiempo real qué calles u óvalos están inundados para no dañar el motor de mi vehículo."</p>
+                        <select onchange="checkAssignment(2, this.value)" class="mt-2 w-full text-xs p-1.5 rounded border border-slate-300 bg-white font-medium">
+                            <option value="">¿Quién lo necesita?</option>
+                            <option value="comerciante">Comerciante de calzado / abarrotes</option>
+                            <option value="peaton">Transportista urbano / Peatón</option>
+                            <option value="vecina">Vecina de vivienda ribereña</option>
+                        </select>
+                        <div id="feedback-card-2" class="mt-1 text-[11px] font-semibold hidden"></div>
+                    </div>
+
+                    <div class="p-3 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 text-xs text-slate-700">
+                        <p class="font-medium">"Necesito una alarma sonora comunitaria o SMS que me despierte a tiempo si la quebrada se activa en la noche."</p>
+                        <select onchange="checkAssignment(3, this.value)" class="mt-2 w-full text-xs p-1.5 rounded border border-slate-300 bg-white font-medium">
+                            <option value="">¿Quién lo necesita?</option>
+                            <option value="comerciante">Comerciante de calzado / abarrotes</option>
+                            <option value="peaton">Transportista urbano / Peatón</option>
+                            <option value="vecina">Vecina de vivienda ribereña</option>
+                        </select>
+                        <div id="feedback-card-3" class="mt-1 text-[11px] font-semibold hidden"></div>
+                    </div>
+                </div>
+
+                <div id="modulo1-success" class="hidden p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-emerald-500 text-base"></i>
+                    <span><strong>¡Muy bien!</strong> Has identificado que cada usuario tiene un dolor diferente ante la misma catástrofe.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- MÓDULO 2: IDEAS PREMATURAS VS NECESIDADES IDENTIFICADAS -->
+        <section id="modulo2" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-nino-navy">Módulo 2: Ideas Prematuras vs. Necesidades Reales</h2>
+                    <p class="text-xs sm:text-sm text-slate-500">Aprende a diferenciar el amor al producto frente a la atención a una necesidad real.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="border border-red-200 bg-red-50/60 p-4 rounded-xl">
+                    <h3 class="text-red-700 font-bold text-xs sm:text-sm flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Idea Prematura (Solución apresurada)
+                    </h3>
+                    <p class="text-xs text-slate-700">Se enfoca ciegamente en un artefacto: <em>"Fabricaremos un dron acuático con IA"</em>, sin validar si es costeable o viable durante las lluvias.</p>
+                </div>
+
+                <div class="border border-emerald-200 bg-emerald-50/60 p-4 rounded-xl">
+                    <h3 class="text-emerald-700 font-bold text-xs sm:text-sm flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-bullseye"></i> Necesidad Real (Problema validado)
+                    </h3>
+                    <p class="text-xs text-slate-700">Se enfoca en el problema humano: <em>"Las familias vulnerables necesitan evacuar sus enseres antes de que el lodo supere los 30 cm"</em>.</p>
+                </div>
+            </div>
+
+            <div class="space-y-3 pt-2">
+                <h4 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass-chart text-amber-500"></i> Detector: ¿Idea Prematura o Necesidad Real?
+                </h4>
+
+                <div class="space-y-2">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                        <span class="text-slate-800 font-medium">1. "Construiremos un robot autónomo para destapar alcantarillas en plena lluvia torrencial."</span>
+                        <div class="flex gap-2 shrink-0">
+                            <button onclick="checkDetector(1, 'solucion')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-200 font-semibold">Idea Prematura</button>
+                            <button onclick="checkDetector(1, 'problema')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-200 font-semibold">Necesidad Real</button>
+                        </div>
+                    </div>
+                    <div id="detector-feedback-1" class="text-xs font-semibold px-2 hidden"></div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                        <span class="text-slate-800 font-medium">2. "Los transportistas y peatones no tienen información oportuna de vías anegadas para evitar quedar atrapados."</span>
+                        <div class="flex gap-2 shrink-0">
+                            <button onclick="checkDetector(2, 'solucion')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-200 font-semibold">Idea Prematura</button>
+                            <button onclick="checkDetector(2, 'problema')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-200 font-semibold">Necesidad Real</button>
+                        </div>
+                    </div>
+                    <div id="detector-feedback-2" class="text-xs font-semibold px-2 hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MÓDULO 3: TÉCNICAS DE INVESTIGACIÓN -->
+        <section id="modulo3" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 rounded-xl bg-cyan-100 text-nino-cyan flex items-center justify-center font-bold text-lg">3</span>
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-nino-navy">Módulo 3: Técnicas de Investigación y Entrevistas</h2>
+                    <p class="text-xs sm:text-sm text-slate-500">Recolección cualitativa en campo y contraste con fuentes oficiales.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <div class="text-nino-cyan text-lg mb-1"><i class="fa-solid fa-comments"></i></div>
+                    <h4 class="font-bold text-slate-800 text-xs">Entrevistas Abiertas</h4>
+                    <p class="text-[11px] text-slate-600">Preguntar por experiencias pasadas sin inducir la respuesta.</p>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <div class="text-amber-500 text-lg mb-1"><i class="fa-solid fa-eye"></i></div>
+                    <h4 class="font-bold text-slate-800 text-xs">Observación Directa</h4>
+                    <p class="text-[11px] text-slate-600">Inspeccionar zanjas, muros de contención y flujo del agua.</p>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <div class="text-emerald-500 text-lg mb-1"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                    <h4 class="font-bold text-slate-800 text-xs">Encuestas Breves</h4>
+                    <p class="text-[11px] text-slate-600">Estadísticas sobre cobertura móvil y acceso a energía.</p>
+                </div>
+                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+                    <div class="text-indigo-500 text-lg mb-1"><i class="fa-solid fa-building-shield"></i></div>
+                    <h4 class="font-bold text-slate-800 text-xs">Fuentes Oficiales</h4>
+                    <p class="text-[11px] text-slate-600">Datos verificados de INDECI, SENAMHI y COER.</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <h4 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-scale-balanced text-nino-cyan"></i> Evaluador de Preguntas de Entrevista
+                </h4>
+                <div class="p-3 bg-white rounded-lg border border-slate-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <span><strong>Pregunta:</strong> "¿Verdad que a usted le encantaría comprar una aplicación móvil que nosotros programemos?"</span>
+                    <div class="flex gap-2">
+                        <button onclick="evalQuestion('sesgada')" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 font-semibold rounded">Inducida / Sesgada</button>
+                        <button onclick="evalQuestion('abierta')" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 font-semibold rounded">Abierta / Adecuada</button>
+                    </div>
+                </div>
+                <div id="eval-feedback" class="text-xs px-2 hidden"></div>
+            </div>
+        </section>
+
+        <!-- MÓDULO 4: LIENZO INTERACTIVO LEAN CANVAS -->
+        <section id="modulo4" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">4</span>
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-nino-navy">Módulo 4: Lienzo Lean Canvas (Bloques 1 y 2)</h2>
+                    <p class="text-xs sm:text-sm text-slate-500">Formula el problema y el segmento de usuarios de tu proyecto.</p>
+                </div>
+            </div>
+
+            <form id="leanCanvasForm" class="grid grid-cols-1 md:grid-cols-2 gap-4" onsubmit="event.preventDefault(); renderCanvasPreview();">
+                <div class="border border-red-200 rounded-xl p-4 bg-slate-50 space-y-3">
+                    <div class="font-bold text-red-700 text-xs sm:text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-circle-exclamation"></i> Bloque 1: Problema
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre de la Solución / Proyecto:</label>
+                        <input id="projName" type="text" placeholder="Ej. Alerta Temprana Comunitaria" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-nino-cyan">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Problema Central Validado:</label>
+                        <textarea id="projProblem" rows="3" placeholder="Describe el problema real comprobado en el campo..." required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-nino-cyan"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Alternativas Actuales utilizadas:</label>
+                        <input id="projAlternatives" type="text" placeholder="Ej. Sacos de arena, llamadas telefónicas improvisadas" class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-nino-cyan">
+                    </div>
+                </div>
+
+                <div class="border border-emerald-200 rounded-xl p-4 bg-slate-50 space-y-3">
+                    <div class="font-bold text-emerald-700 text-xs sm:text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-users"></i> Bloque 2: Segmento de Clientes / Usuarios
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Zona Geográfica:</label>
+                        <input id="projLocation" type="text" placeholder="Ej. El Porvenir / Quebrada San Ildefonso" required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-nino-cyan">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Perfil del Usuario Afectado (Early Adopter):</label>
+                        <textarea id="projSegment" rows="3" placeholder="Ej. Familias ribereñas, dirigentes barriales, comerciantes ambulantes..." required class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-nino-cyan"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Condición de Conectividad:</label>
+                        <input id="projTechContext" type="text" placeholder="Ej. Red celular básica o inestable durante lluvias" class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-nino-cyan">
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 text-right">
+                    <button type="submit" class="px-5 py-2 bg-nino-navy hover:bg-nino-blue text-white text-xs sm:text-sm font-bold rounded-xl shadow transition">
+                        <i class="fa-solid fa-table-cells mr-1"></i> Previsualizar Ficha Lean Canvas
+                    </button>
+                </div>
+            </form>
+
+            <div id="canvasPreview" class="hidden p-5 border-2 border-slate-300 rounded-2xl bg-white space-y-3">
+                <div class="flex justify-between items-center border-b pb-2">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-nino-cyan">Ficha de Trabajo Inicial Lean Canvas</span>
+                        <h3 id="prevTitle" class="text-base font-bold text-nino-navy"></h3>
+                        <p id="prevLocation" class="text-xs text-slate-500"></p>
+                    </div>
+                    <button onclick="window.print()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1 border no-print">
+                        <i class="fa-solid fa-print"></i> Imprimir Ficha
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div class="p-3 bg-red-50/50 border border-red-200 rounded-lg">
+                        <strong class="text-red-700 block mb-1">Bloque 1: Problema Principal</strong>
+                        <p id="prevProblem" class="text-slate-800"></p>
+                        <span class="block mt-2 text-slate-500 text-[11px]"><strong>Alternativas actuales:</strong> <span id="prevAlternatives"></span></span>
+                    </div>
+                    <div class="p-3 bg-emerald-50/50 border border-emerald-200 rounded-lg">
+                        <strong class="text-emerald-700 block mb-1">Bloque 2: Segmento de Usuarios</strong>
+                        <p id="prevSegment" class="text-slate-800"></p>
+                        <span class="block mt-2 text-slate-500 text-[11px]"><strong>Conectividad:</strong> <span id="prevTechContext"></span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MÓDULO 5: EVALUACIÓN FINAL DEFINITIVA -->
+        <section id="modulo5" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">5</span>
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-nino-navy">Módulo 5: Evaluación Final y Registro</h2>
+                    <p class="text-xs sm:text-sm text-slate-500">Ingresa tus datos personales. Lee con atención: una vez enviada, no podrás modificar tus respuestas.</p>
+                </div>
+            </div>
+
+            <form id="quizForm" class="space-y-5" onsubmit="event.preventDefault(); submitEvaluation();">
+                <!-- Datos del Estudiante -->
+                <div class="p-4 bg-blue-50/60 border border-blue-200 rounded-xl grid grid-cols-1 sm:grid-cols-4 gap-3">
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Apellidos completos:</label>
+                        <input id="studentLastName" type="text" placeholder="Ej. Gonzales Paredes" required class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-nino-cyan focus:outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nombres completos:</label>
+                        <input id="studentFirstName" type="text" placeholder="Ej. Daniel Alejandro" required class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-nino-cyan focus:outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Grado:</label>
+                        <select id="studentGrade" required class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-nino-cyan focus:outline-none">
+                            <option value="">Selecciona el grado...</option>
+                            <option value="1ro Secundaria">1ro de Secundaria</option>
+                            <option value="2do Secundaria">2do de Secundaria</option>
+                            <option value="3ro Secundaria">3ro de Secundaria</option>
+                            <option value="4to Secundaria">4to de Secundaria</option>
+                            <option value="5to Secundaria">5to de Secundaria</option>
+                            <option value="Educación Superior">Educación Superior</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Sección:</label>
+                        <input id="studentSection" type="text" placeholder="Ej. A, B, C o Única" required class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-nino-cyan focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Pregunta 1 -->
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
+                    <p class="font-bold text-slate-800">1. ¿Por qué es un error metodológico construir la aplicación móvil antes de entrevistar a los vecinos?</p>
+                    <div class="space-y-1 text-slate-700">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q1" value="A"> Porque programar soluciones informáticas no está permitido en proyectos de innovación.</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q1" value="B"> Porque podríamos resolver un problema inexistente o diseñar con tecnología inaccesible para los vecinos durante la emergencia.</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q1" value="C"> Porque las apps móviles solo funcionan si no hay precipitaciones pluviales.</label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
+                    <p class="font-bold text-slate-800">2. En una entrevista empática para validar el problema, ¿qué formulación es la correcta?</p>
+                    <div class="space-y-1 text-slate-700">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q2" value="A"> Preguntas abiertas sobre hechos vividos ("¿Cómo se organizó su familia durante la última crecida de la quebrada?").</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q2" value="B"> Preguntas sugeridas que obliguen al entrevistado a confirmar que comprará nuestro invento.</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q2" value="C"> Preguntas cerradas donde solo se permita contestar 'Sí' o 'No'.</label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
+                    <p class="font-bold text-slate-800">3. ¿Cuáles son las fuentes institucionales oficiales para contrastar información científica sobre el fenómeno de El Niño en Perú?</p>
+                    <div class="space-y-1 text-slate-700">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q3" value="A"> Rumores virales en redes sociales y cadenas de chat.</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q3" value="B"> SENAMHI, INDECI y reportes oficiales del COER.</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q3" value="C"> Plataformas comerciales de comercio electrónico.</label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4 -->
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
+                    <p class="font-bold text-slate-800">4. En el modelo Lean Canvas, ¿cuáles son los dos primeros bloques a formular obligatoriamente?</p>
+                    <div class="space-y-1 text-slate-700">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q4" value="A"> Estructura de Costos y Canales de Venta.</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q4" value="B"> Publicidad y Estrategia de Marketing.</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q4" value="C"> Bloque 1 (Problema) y Bloque 2 (Segmento de Clientes / Usuarios).</label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 5 (Metacognición) -->
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
+                    <p class="font-bold text-slate-800">5. Reflexión metacognitiva: ¿Qué cambió en tu enfoque del proyecto tras ponerte en el lugar de los vecinos afectados?</p>
+                    <textarea id="metacognitionInput" rows="2" required placeholder="Escribe aquí tu aprendizaje personal (mínimo 10 caracteres)..." class="w-full text-xs p-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-nino-cyan"></textarea>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="text-right">
+                    <button id="submitBtn" type="submit" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow transition flex items-center gap-2 ml-auto">
+                        <span id="btnText"><i class="fa-solid fa-paper-plane"></i> Calificar y Enviar Evaluación</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Cuadro de Resultado -->
+            <div id="quizResult" class="hidden p-5 rounded-xl border transition-all duration-300">
+                <div class="flex items-center gap-3">
+                    <div id="quizBadge" class="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"></div>
+                    <div>
+                        <h4 id="quizScoreText" class="font-extrabold text-base sm:text-lg"></h4>
+                        <p id="quizFeedbackMessage" class="text-xs text-slate-600"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-slate-900 text-slate-400 py-6 px-4 text-center text-xs mt-12 border-t border-slate-800 no-print">
+        <p class="font-medium text-slate-300">Sesión 2: Conocemos a nuestros usuarios y validamos sus problemas</p>
+        <p class="mt-1">Orientación pedagógica: <strong>Maestro Robinson Mitchel Gonzales Quiliche</strong></p>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // URL DE TU IMPLEMENTACIÓN DE APPS SCRIPT
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwuX1E2ErWbt7A43OuOSiOxMcWF5kOAWq4vnLxDvKe0uUC2RYSyMWIOTYdJ33o2FQvoTw/exec";
+
+        // ESTADO DE PROGRESO
+        const progressState = { m1: false, m2: false, m3: false, m4: false, m5: false };
+        function updateProgress() {
+            const completed = Object.values(progressState).filter(Boolean).length;
+            const pct = Math.round((completed / 5) * 100);
+            document.getElementById('progress-bar').style.width = pct + '%';
+            document.getElementById('progress-percent').innerText = pct + '% completado';
+        }
+
+        // MÓDULO 1
+        const userSolutions = { 1: false, 2: false, 3: false };
+        function checkAssignment(cardId, val) {
+            const fb = document.getElementById(`feedback-card-${cardId}`);
+            fb.classList.remove('hidden', 'text-emerald-600', 'text-red-500');
+            const valid = (cardId === 1 && val === 'comerciante') || (cardId === 2 && val === 'peaton') || (cardId === 3 && val === 'vecina');
+            
+            if (valid) {
+                fb.innerText = "¡Correcto!";
+                fb.classList.add('text-emerald-600');
+                userSolutions[cardId] = true;
+            } else if (!val) {
+                fb.classList.add('hidden');
+                userSolutions[cardId] = false;
+            } else {
+                fb.innerText = "Piénsalo de nuevo según el rol.";
+                fb.classList.add('text-red-500');
+                userSolutions[cardId] = false;
+            }
+
+            if (userSolutions[1] && userSolutions[2] && userSolutions[3]) {
+                document.getElementById('modulo1-success').classList.remove('hidden');
+                progressState.m1 = true;
+                updateProgress();
+            }
+        }
+
+        // MÓDULO 2
+        const detAnswers = { 1: false, 2: false };
+        function checkDetector(id, choice) {
+            const fb = document.getElementById(`detector-feedback-${id}`);
+            fb.classList.remove('hidden', 'text-emerald-600', 'text-red-500');
+            const ok = (id === 1 && choice === 'solucion') || (id === 2 && choice === 'problema');
+            if (ok) {
+                fb.innerText = "¡Acertaste! " + (choice === 'solucion' ? "Es una idea prematura centrada en tecnología." : "Describe un problema real medible.");
+                fb.classList.add('text-emerald-600');
+                detAnswers[id] = true;
+            } else {
+                fb.innerText = "Incorrecto. Analiza si se enfoca en el problema o en el artefacto.";
+                fb.classList.add('text-red-500');
+                detAnswers[id] = false;
+            }
+            if (detAnswers[1] && detAnswers[2]) {
+                progressState.m2 = true;
+                updateProgress();
+            }
+        }
+
+        // MÓDULO 3
+        function evalQuestion(choice) {
+            const fb = document.getElementById('eval-feedback');
+            fb.classList.remove('hidden', 'text-emerald-600', 'text-red-500');
+            if (choice === 'sesgada') {
+                fb.innerText = "¡Correcto! Decir '¿Verdad que...?' induce la respuesta y falsea la validación.";
+                fb.classList.add('text-emerald-600');
+                progressState.m3 = true;
+                updateProgress();
+            } else {
+                fb.innerText = "Incorrecto. Esta pregunta es inducida/sesgada porque presiona una respuesta positiva.";
+                fb.classList.add('text-red-500');
+            }
+        }
+
+        // MÓDULO 4
+        function renderCanvasPreview() {
+            document.getElementById('prevTitle').innerText = document.getElementById('projName').value;
+            document.getElementById('prevLocation').innerText = "Zona: " + document.getElementById('projLocation').value;
+            document.getElementById('prevProblem').innerText = document.getElementById('projProblem').value;
+            document.getElementById('prevAlternatives').innerText = document.getElementById('projAlternatives').value || "No especificadas";
+            document.getElementById('prevSegment').innerText = document.getElementById('projSegment').value;
+            document.getElementById('prevTechContext').innerText = document.getElementById('projTechContext').value || "No especificado";
+
+            document.getElementById('canvasPreview').classList.remove('hidden');
+            progressState.m4 = true;
+            updateProgress();
+            document.getElementById('canvasPreview').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // MÓDULO 5: EVALUACIÓN, BLOQUEO Y ENVÍO GARANTIZADO
+        function submitEvaluation() {
+            const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+            const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+            const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+            const q4 = document.querySelector('input[name="q4"]:checked')?.value;
+            const reflex = document.getElementById('metacognitionInput').value.trim();
+            const lastName = document.getElementById('studentLastName').value.trim();
+            const firstName = document.getElementById('studentFirstName').value.trim();
+            const grade = document.getElementById('studentGrade').value;
+            const section = document.getElementById('studentSection').value.trim();
+
+            if (!lastName || !firstName || !grade || !section) {
+                alert("Por favor completa todos tus datos personales (Apellidos, Nombres, Grado y Sección).");
+                return;
+            }
+
+            if (!q1 || !q2 || !q3 || !q4 || reflex.length < 10) {
+                alert("Por favor responde todas las preguntas y redacta tu reflexión en la pregunta 5 (mínimo 10 caracteres).");
+                return;
+            }
+
+            const confirmSend = confirm("¿Estás seguro de enviar tu evaluación? Una vez enviada NO podrás modificar tus respuestas.");
+            if (!confirmSend) return;
+
+            // Cálculo de puntaje
+            let score = 0;
+            if (q1 === 'B') score += 5;
+            if (q2 === 'A') score += 5;
+            if (q3 === 'B') score += 5;
+            if (q4 === 'C') score += 5;
+
+            // BLOQUEAR TODOS LOS CAMPOS
+            const allInputs = document.querySelectorAll('#quizForm input, #quizForm textarea, #quizForm select');
+            allInputs.forEach(el => el.disabled = true);
+
+            // Mostrar resultado visual
+            const rBox = document.getElementById('quizResult');
+            const badge = document.getElementById('quizBadge');
+            const sText = document.getElementById('quizScoreText');
+            const fMsg = document.getElementById('quizFeedbackMessage');
+
+            rBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-300', 'bg-amber-50', 'border-amber-300');
+
+            if (score >= 15) {
+                rBox.classList.add('bg-emerald-50', 'border-emerald-300');
+                badge.className = "w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold bg-emerald-600";
+                badge.innerHTML = '<i class="fa-solid fa-trophy"></i>';
+                sText.className = "font-extrabold text-base sm:text-lg text-emerald-900";
+                sText.innerText = `Puntaje Final: ${score}/20 pts`;
+                fMsg.innerText = "¡Excelente trabajo! Has demostrado dominio en la investigación empírica y en evitar soluciones precipitadas frente a El Niño.";
+            } else {
+                rBox.classList.add('bg-amber-50', 'border-amber-300');
+                badge.className = "w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold bg-amber-600";
+                badge.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+                sText.className = "font-extrabold text-base sm:text-lg text-amber-900";
+                sText.innerText = `Puntaje Final: ${score}/20 pts`;
+                fMsg.innerText = "Evaluación registrada. Recuerda siempre enfocar tus preguntas de campo de forma abierta y no sesgada.";
+            }
+
+            const btnText = document.getElementById('btnText');
+            btnText.innerText = "Guardando en Google Sheets...";
+
+            // OBJETO CON DATOS
+            const payload = {
+                apellidos: lastName,
+                nombres: firstName,
+                grado: grade,
+                seccion: section,
+                proyecto: document.getElementById('projName')?.value || "Sin registrar",
+                puntaje: score,
+                reflexion: reflex
+            };
+
+            // ENVÍO MEDIANTE FORMULARIO OCULTO (EVITA BLOQUEOS DE CORS EN CUALQUIER NAVEGADOR)
+            let iframe = document.getElementById('hidden_iframe');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.name = 'hidden_iframe';
+                iframe.id = 'hidden_iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
+
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = APPS_SCRIPT_URL;
+            form.target = 'hidden_iframe';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'postData';
+            input.value = JSON.stringify(payload);
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+
+            setTimeout(() => {
+                alert(`¡Excelente, ${firstName}! Tu evaluación ha sido enviada con éxito al docente y ha quedado bloqueada.`);
+                btnText.innerHTML = '<i class="fa-solid fa-lock"></i> Evaluación Enviada y Bloqueada';
+                progressState.m5 = true;
+                updateProgress();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
